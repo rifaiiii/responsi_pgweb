@@ -1,0 +1,28 @@
+var titikWisata = {
+    "type": "FeatureCollection",
+    "name": "Titik_Wisata_Pacitan",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+    { "type": "Feature", "properties": { "Latitude": -8.276451, "Longitude": 111.150127, "PopUpConte": "Pantai Pangasan", "ImageURL": "img/pangasan.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.150127223218007, -8.27645114529353 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.205034, "Longitude": 110.947452, "PopUpConte": "Pantai Klayar", "ImageURL": "img/Klayar.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.947451593487003, -8.205034016692901 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.219985, "Longitude": 110.972171, "PopUpConte": "Pantai Watu Karung", "ImageURL": "img/Watukarung.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.972170831940005, -8.2199853044409 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.233248, "Longitude": 110.992556, "PopUpConte": "Pantai Srau", "ImageURL": "img/Srau.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.992556241086007, -8.233247744083419 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.22985, "Longitude": 110.984316, "PopUpConte": "Pantai Kasap", "ImageURL": "img/Kasap.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.984316494935001, -8.22984988728318 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.193831, "Longitude": 110.910159, "PopUpConte": "Pantai Banyu Tibo", "ImageURL": "img/BanyuTibo.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.910158779577998, -8.19383081567767 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.209028, "Longitude": 110.91886, "PopUpConte": "Pantai Ngandul", "ImageURL": "img/Ngandul.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.918859892382002, -8.20902838554737 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.193397, "Longitude": 110.90856, "PopUpConte": "Pantai Kijingan", "ImageURL": "img/Kijingan.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.908560209694002, -8.19339704931989 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.234011, "Longitude": 111.257997, "PopUpConte": "Pantai Ngenesan", "ImageURL": "img/Ngenesan.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.257997439407006, -8.23401087310363 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.246276, "Longitude": 111.243375, "PopUpConte": "Pantai Pidakan", "ImageURL": "img/Pidakan.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.243374653263999, -8.2462760973406 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.255705, "Longitude": 111.304243, "PopUpConte": "Pantai Taman Ngadirojo", "ImageURL": "img/Ngadirojo.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.304243459294, -8.255704639511849 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.156462, "Longitude": 110.977876, "PopUpConte": "Goa Gong", "ImageURL": "img/Gong.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.977876464459996, -8.15646190935316 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.121157, "Longitude": 110.983298, "PopUpConte": "Goa Tabuhan", "ImageURL": "img/Goa.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.983297635987995, -8.121156518719671 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.143446, "Longitude": 111.004674, "PopUpConte": "Goa Putri", "ImageURL": "img/Goa_Putri.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.004674016232002, -8.14344572605688 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.194492, "Longitude": 111.103178, "PopUpConte": "Alun Alun Pacitan", "ImageURL": "img/Alun.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.103178336691997, -8.19449182885627 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.205714, "Longitude": 111.06149, "PopUpConte": "Beiji Park (Ex Pacitan Indah)", "ImageURL": "img/Beiji.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.061489736691996, -8.20571393097857 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.204338, "Longitude": 110.955197, "PopUpConte": "Sungai Maron", "ImageURL": "img/Maron.jpg" }, "geometry": { "type": "Point", "coordinates": [ 110.955196836691997, -8.20433838735905 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.090835, "Longitude": 111.130543, "PopUpConte": "Pemandian Banyu Anget Tirto Husodo", "ImageURL": "img/BanyuAnget.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.130543250181006, -8.090834785010861 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.019925, "Longitude": 111.325383, "PopUpConte": "Jurug Gringsing", "ImageURL": "img/Gringsing.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.325383137499003, -8.019925366611099 ] } },
+    { "type": "Feature", "properties": { "Latitude": -8.046536, "Longitude": 111.347026, "PopUpConte": "Hutan Pinus Gemaharjo", "ImageURL": "img/Gemaharjo.jpg" }, "geometry": { "type": "Point", "coordinates": [ 111.347026025049999, -8.04653599748489 ] } }
+    ]
+    }
+    

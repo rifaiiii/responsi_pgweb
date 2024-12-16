@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Metadata -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Amirul Fahmi A" />
+  <meta name="description" content="leaflet basic" />
+
+
+  <!-- Judul pada tab browser -->
+  <title>SISPAR PACITAN</title>
+
+  <!-- Tab browser icon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/logo/logo-pacitan.png" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style2.css" />
+  <!-- Leaflet CSS Library -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+
+  <!-- Search CSS Library-->
+  <link rel="stylesheet" href="assets/plugins/leaflet-search/leaflet-search.css" />
+
+  <!-- Geolocation CSS Library for Plugin -->
+  <link rel="stylesheet"
+    href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css" />
+
+  <!-- Leaflet Mouse Position CSS Library -->
+  <link rel="stylesheet" href="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.css" />
+
+  <!-- Leaflet Measure CSS Library -->
+  <link rel="stylesheet" href="assets/plugins/leaflet-measure/leaflet-measure.css" />
+
+  <!-- Leaflet Marker Cluster CSS Library -->
+  <link rel="stylesheet" href="assets/plugins/Leaflet.markercluster-1.4.1/MarkerCluster.css" />
+  <link rel="stylesheet" href="assets/plugins/Leaflet.markercluster-1.4.1/MarkerCluster.Default.css" />
+
+  <!-- EasyPrint CSS Library -->
+  <link rel="stylesheet" href="assets/plugins/leaflet-easyprint/easyPrint.css" />
+
+  <!-- CSS Boostrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+  <!--Leaflet Routing Machine CSS-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+  <!--Geocoder cSS-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Tampilan peta fullscreen */
+    html,
+    body,
+    #map {
+      height: 550px;
+      /* width: 100%;
+        margin: 0px; */
+    }
+
+    /* Background pada Judul */
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .info h2 {
+      margin: 0 0 5px;
+      color: rgb(54, 54, 54);
+    }
+
+    /* Gambar PopUp Marker */
+    /* img {
+      height: 100px;
+      width: 100px;
+    } */
+  </style>
+</head>
+
+<!--Area-->
+<script src="./data/dataarea.js"></script>
+
+<body>
+  <!-- Leaflet Leaflet AJAX -->
+  <script src="data/leaflet.ajax.js"></script>
+
+  <!-- Leaflet JavaScript Library -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <script src="data/leaflet.ajax.js"></script>
+  <script src="data/leaflet.ajax.min.js"></script>
+
+  <!--Search JavaScript Library-->
+  <script src="assets/plugins/leaflet-search/leaflet-search.js"></script>
+
+  <!-- Geolocation JavaScript Library -->
+  <script
+    src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+
+  <!--Leaflet Mouse Position JavaScript Library-->
+  <script src="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+
+  <!--Leaflet Measure JavaScript Library-->
+  <script src="assets/plugins/leaflet-measure/leaflet-measure.js"></script>
+
+  <!--Easy Print JavaScript Library-->
+  <script src="assets/plugins/leaflet-easyprint/leaflet.easyPrint.js"></script>
+
+  <!--JS Boostrap-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Leaflet Marker Cluster JavaScript Library -->
+  <script src="assets/plugins/Leaflet.markercluster-1.4.1/leaflet.markercluster.js"></script>
+
+  <!--Leaflet Machine Routing JS Library-->
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+  <!--Leaflet Geocoder-->
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #0095ff">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-mountain-sun mx-2"></i>SISPAR PACITAN</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">WebGIS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Copyright</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="table.php">Data</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--Akhir Navbar-->
+
+  <div id="map"></div>
+
+  <!--Akhir Contacts-->
+
+  <footer id="contact">
+
+    <div class="layar-dalam">
+      <div class="copyright">&copy; 2023 Sistem Informasi Pariwisata Pacitan</div>
+    </div>
+  </footer>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="javascript.js3"></script>'
+  <script src="wisata.js"></script>
+
+  <script>
+    /* Initial Map */
+    var map = L.map("map").setView([-8.13333, 111.16667], 10); //lat, long, zoom
+
+
+
+
+    /*Judul dan Sub Judul*/
+    var title = new L.Control();
+    title.onAdd = function (map) {
+      this._div = L.DomUtil.create("div", "info");
+      this.update();
+      return this._div;
+    };
+    title.update = function () {
+      this._div.innerHTML = "<h5>SISPAR | SISTEM INFORMASI PARIWISATA SEPUTAR PACITAN</h5>";
+    };
+    title.addTo(map);
+
+    /* Tile Basemap */
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        'Map data ©️ <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    var basemap1 = L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="DIVSIGUGM" target="_blank">DIVSIG UGM</a>',
+      }
+    );
+
+    var basemap2 = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution:
+          'Tiles &copy; Esri | <a href="Latihan WebGIS" target="_blank">DIVSIG UGM</a>',
+      }
+    );
+
+    var basemap3 = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution:
+          'Tiles &copy; Esri | <a href="Lathan WebGIS" target="_blank">DIVSIG UGM</a>',
+      }
+    );
+
+    var basemap4 = L.tileLayer(
+      "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+      }
+    );
+
+    basemap4.addTo(map);
+
+    var baseMaps = {
+      OpenStreetMap: basemap1,
+      "Esri World Street": basemap2,
+      "Esri Imagery": basemap3,
+      "Stadia Dark Mode": basemap4,
+    };
+
+    L.control.layers(baseMaps).addTo(map);
+    //tambahin area dan menampilkan pop-up nya
+
+    //Area
+    var geojson = L.geoJson(dataarea, {
+      onEachFeature: function (feature, layer) {
+        var popupText = "Kecamatan: " + feature.properties.KECAMATAN;
+
+        if (feature.properties.KABUPATEN) {
+          popupText += "<br/>Kabupaten: " + feature.properties.KABUPATEN;
+        }
+        layer.bindPopup(popupText);
+      },
+    });
+
+    // //marker cluster
+    var markers = L.markerClusterGroup();
+    var titikWisataLayer = L.geoJSON(titikWisata, {
+      onEachFeature: function (feature, layer) {
+        var popupContent = '<b>' + feature.properties.PopUpConte + '</b><br/><img src="' + feature.properties.ImageURL + '" alt="' + feature.properties.PopUpConte + '" width="100px" height="100px"/>';
+        layer.bindPopup(popupContent);
+      },
+    });
+    markers.addLayer(titikWisataLayer);
+
+    //menambahkan file geojson area
+    markers.addLayer(geojson);
+
+    //nambahin marker
+    map.addLayer(markers);
+    map.fitBounds(markers.getBounds());
+
+    // /* Layer Marker */
+
+    // var marker1 = L.marker([-8.276451145293533, 111.15012722321859], { draggable: true });
+    // marker1.addTo(map);
+    // marker1.bindPopup('<b>Pantai Pangasan</b> <br /><center> <img src="img/pangasan.jpg" alt="img/pangasan.jpg">');
+
+    // var marker2 = L.marker([-8.205034016692904, 110.94745159348774]);
+    // marker2.addTo(map);
+    // marker2.bindPopup('<b>Pantai Klayar</b> <br /><center> <img src="img/Klayar.jpg">');
+
+    // var marker3 = L.marker([-8.219985304440902, 110.97217083194009]);
+    // marker3.addTo(map);
+    // marker3.bindPopup('<b>Pantai Watu Karung</b> <br /><center> <img src="img/Watukarung.jpg">');
+
+    // var marker4 = L.marker([-8.233247744083426, 110.99255624108659]);
+    // marker4.addTo(map);
+    // marker4.bindPopup('<b>Pantai Srau</b> <br /><center> <img src="img/Srau.jpg">');
+
+    // var marker5 = L.marker([-8.22984988728318, 110.98431649493581]);
+    // marker5.addTo(map);
+    // marker5.bindPopup('<b>Pantai Kasap</b> <br /><center> <img src="img/Kasap.jpg">');
+
+    // var marker6 = L.marker([-8.193830815677678, 110.9101587795788]);
+    // marker6.addTo(map);
+    // marker6.bindPopup('<b>Pantai Banyu Tibo</b> <br /><center> <img src="img/BanyuTibo.jpg">');
+
+    // var marker7 = L.marker([-8.20902838554737, 110.91885989238294]);
+    // marker7.addTo(map);
+    // marker7.bindPopup('<b>Pantai Ngandul</b> <br /><center> <img src="img/Ngandul.jpg">');
+
+    // var marker8 = L.marker([-8.193397049319891, 110.90856020969443]);
+    // marker8.addTo(map);
+    // marker8.bindPopup('<b>Pantai Kijingan</b> <br /><center> <img src="img/Kijingan.jpg">');
+
+    // var marker9 = L.marker([-8.234010873103633, 111.25799743940793]);
+    // marker9.addTo(map);
+    // marker9.bindPopup('<b>Pantai Ngenesan</b> <br /><center> <img src="img/Ngenesan.jpg">');
+
+    // var marker10 = L.marker([-8.2462760973406, 111.24337465326491]);
+    // marker10.addTo(map);
+    // marker10.bindPopup('<b>Pantai Pidakan</b> <br /><center> <img src="img/Pidakan.jpg">');
+
+    // var marker11 = L.marker([-8.255704639511858, 111.30424345929406]);
+    // marker11.addTo(map);
+    // marker11.bindPopup('<b>Pantai Taman Ngadirojo</b> <br /><center> <img src="img/Ngadirojo.jpg">');
+
+    // var marker12 = L.marker([-8.156461909353167, 110.97787646446032]);
+    // marker12.addTo(map);
+    // marker12.bindPopup('<b>Goa Gong</b> <br /><center> <img src="img/Gong.jpg">');
+
+    // var marker13 = L.marker([-8.121156518719673, 110.98329763598863]);
+    // marker13.addTo(map);
+    // marker13.bindPopup('<b>Goa Tabuhan</b> <br /><center> <img src="img/Goa.jpg">');
+
+    // var marker14 = L.marker([-8.143445726056882, 111.0046740162327]);
+    // marker14.addTo(map);
+    // marker14.bindPopup('<b>Goa Putri</b> <br /><center> <img src="img/Goa_Putri.jpg">');
+
+    // var marker15 = L.marker([-8.194491828856275, 111.103178336692]);
+    // marker15.addTo(map);
+    // marker15.bindPopup('<b>Alun Alun Pacitan</b> <br /><center> <img src="img/Alun.jpg">');
+
+    // var marker16 = L.marker([-8.205713930978575, 111.0614897366922]);
+    // marker16.addTo(map);
+    // marker16.bindPopup('<b>Beiji Park (Ex Pacitan Indah) </b> <br /><center> <img src="img/Beiji.jpg">');
+
+    // var marker17 = L.marker([-8.204338387359057, 110.95519683669217]);
+    // marker17.addTo(map);
+    // marker17.bindPopup('<b>Sungai Maron</b> <br /><center> <img src="img/Maron.jpg">');
+
+    // var marker18 = L.marker([-8.090834785010864, 111.13054325018172]);
+    // marker18.addTo(map);
+    // marker18.bindPopup('<b>Pemandian Banyu Anget Tirto Husodo</b> <br /><center> <img src="img/BanyuAnget.jpg">');
+
+    // var marker19 = L.marker([-8.019925366611107, 111.32538313749973]);
+    // marker19.addTo(map);
+    // marker19.bindPopup('<b>Jurug Gringsing</b> <br /><center> <img src="img/Gringsing.jpg">');
+
+    // var marker20 = L.marker([-8.046535997484893, 111.34702602505062]);
+    // marker20.addTo(map);
+    // marker20.bindPopup('<b>Hutan Pinus Gemaharjo</b> <br /><center> <img src="img/Gemaharjo.jpg">');
+
+
+
+    /*Pacitan*/
+    var pacitan = new L.GeoJSON.AJAX("Admin_Pacitan.geojson", {
+      style: function (feature) {
+        if ((feature.properties.WADMKC == "Tegalombo", "PANDAN")) {
+          return {
+            opacity: 2,
+            color: "black",
+            weight: 0.5,
+            fillOpacity: 0.7,
+            fillColor: "#008B8B",
+          };
+        }
+      },
+      onEachFeature: function (feature, layer) {
+        var content = "Kecamatan: " + feature.properties.WADMKC;
+        // var contentTable = "<table>" + "<tr><th>KABUPATEN</th><td>" + feature.properties.KABUPATEN + "</td></tr>" + "<tr><th>KECAMATAN</th><td>" + feature.properties.KECAMATAN + "</td></tr>" + "</table>";
+
+        layer.on({
+          click: function (e) {
+            //Fungsi ketika obyek diklik
+            pacitan.bindPopup(content);
+          },
+          mouseover: function (e) {
+            //Fungsi mouse berada di atas obyek untuk highlight
+            var layer = e.target; //variabel layer
+            layer.setStyle({
+              //Highlight style
+              color: "black", //Warna garis tepi polygon
+              weight: 0.2, //Tebal garis tepi polygon
+              opacity: 1, //Transparansi garis tepi polygon
+              fillColor: "cyan", //Warna tengah polygon
+              fillOpacity: 0.7, //Transparansi polygon
+            });
+            pacitan.bindPopup("Kecamatan " + feature.properties.KECAMATAN, { sticky: false });
+          },
+          mouseout: function (e) {
+            //Fungsi mouse keluar dari obyek
+            pacitan.resetStyle(e.target); //Mengembalikan style garis ke style awal
+            map.closePopup(); //Menutup popup
+          },
+        });
+      },
+    }).addTo(map);
+
+    //Tematik Destinasi Wisata
+    function popUp(f, l) {
+      var out = [];
+      if (f.properties) {
+        for (key in f.properties) {
+          out.push(key + ": " + f.properties[key]);
+        }
+        l.bindPopup(out.join("<br />"));
+      }
+    }
+    var jsonTest = new L.GeoJSON.AJAX(["data/TEMATIK_DESTINASI_WISATA_TAPTENG.geojson"], { onEachFeature: popUp }).addTo(map);
+
+    /* Plugin Search */
+    var searchControl = new L.Control.Search({
+      position: "topleft",
+      layer: pacitan,
+      propertyName: "WADMKC",
+      marker: false,
+      moveToLocation: function (latlng, title, map) {
+        var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+        map.setView(latlng, zoom);
+      },
+    });
+    searchControl
+      .on("search:locationfound", function (e) {
+        e.layer.setStyle({
+          fillColor: "#FFFF00",
+          color: "#0000FF",
+        });
+      })
+      .on("search:collapse", function (e) {
+        featuresLayer.eachLayer(function (layer) {
+          featuresLayer.resetStyle(layer);
+        });
+      });
+    map.addControl(searchControl);
+
+    /*Plugin Geolocation */
+    var locateControl = L.control
+      .locate({
+        position: "topleft",
+        drawCircle: true,
+        follow: true,
+        setView: true,
+        keepCurrentZoomLevel: false,
+        markerStyle: {
+          weight: 1,
+          opacity: 0.8,
+          fillOpacity: 0.8,
+        },
+        circleStyle: {
+          weight: 1,
+          clickable: false,
+        },
+        icon: "fas fa-crosshairs",
+        metric: true,
+        strings: {
+          title: "Click for Your Location",
+          popup: "You're here. Accuracy {distance} {unit}",
+          outsideMapBoundsMsg: "Not available",
+        },
+        locateOptions: {
+          maxZoom: 16,
+          watch: true,
+          enableHighAccuracy: true,
+          maximumAge: 10000,
+          timeout: 10000,
+        },
+      })
+      .addTo(map);
+
+    /*Plugin Mouse Position Coordinate*/
+    L.control
+      .mousePosition({
+        position: "bottomright",
+        separator: ",",
+        prefix: "Point Now",
+      })
+      .addTo(map);
+
+    /*Plugin Measurement Tool*/
+    var measurementControl = new L.Control.Measure({
+      position: "topleft",
+      primaryLengthUnit: "meters",
+      secondaryLengthUnit: "kilometers",
+      primaryAreaUnit: "hectares",
+      secondaryAreaUnit: "sqmeters",
+      activeColor: "#FF0000",
+      completedColor: "#00FF00",
+    });
+    measurementControl.addTo(map);
+
+    /*Plugin Print*/
+    L.easyPrint({
+      title: "Print",
+    }).addTo(map);
+
+    /* Scale Bar */
+    L.control
+      .scale({
+        maxWidth: 150,
+        position: "bottomright",
+      })
+      .addTo(map);
+
+
+    // Image Legend
+    L.Control.Legend = L.Control.extend({
+      onAdd: function (map) {
+        var img2 = L.DomUtil.create("img");
+        img2.src = "assets/img/legend/Legenda_fix.png";
+        img2.style.width = "400px";
+        return img2;
+      },
+    });
+
+    L.control.Legend = function (opts) {
+      return new L.Control.Legend(opts);
+    };
+    L.control.Legend({ position: "bottomleft" }).addTo(map);
+
+    // Image Watermark
+    L.Control.Watermark = L.Control.extend({
+      onAdd: function (map) {
+        var img2 = L.DomUtil.create("img");
+        img2.src = "assets/img/logo/LOGO_SIG_BLUE.png";
+        img2.style.width = "100px";
+        return img2;
+      },
+    });
+    L.control.watermark = function (opts) {
+      return new L.Control.Watermark(opts);
+    };
+    L.control.watermark({ position: "bottomleft" }).addTo(map);
+
+    //Routing
+    var geocoder = L.Control.Geocoder.nominatim();
+    var routeControl = L.Routing.control({
+      waypoints: [null],
+      geocoder: geocoder,
+      addWaypoints: true,
+      show: true,
+      draggableWaypoints: true,
+      routeWhileDragging: true,
+      reverseWaypoints: true,
+      autoToute: true,
+      showAlternatives: true,
+      altLineOptions: {
+        styles: [
+          { color: "black", opacity: 0.15, weight: 9 },
+          { color: "while", opacity: 0.8, weight: 6 },
+          { color: "blue", opacity: 0.5, weight: 2 },
+        ],
+      },
+      waypointNameFallback: function (latLng) {
+        function zeropad(n) {
+          n = Math.round(n);
+          return n < 10 ? "0" + n : n;
+        }
+        function sexagesimal(p, pos, neg) {
+          var n = Math.abs(p),
+            degs = Math.floor(n),
+            mins = (n - degs) * 60,
+            secs = (mins - Math.floor(mins)) * 60,
+            frac = Math.round((secs - Math.floor(secs)) * 100);
+          return (n >= 0 ? pos : neg) + degs + "" + zeropad(mins) + "'" + zeropad(secs) + "." + zeropad(frac) + '"';
+        }
+        return sexagesimal(latLng.lat, "N", "S") + "" + sexagesimal(latLng.lng, "E", "W");
+      },
+      show: true,
+    })
+      .on("routingerror", function (e) {
+        try {
+          map.getCenter();
+        } catch (e) {
+          map.fitBounds(
+            L.latlngBounds(
+              routeControl.getWaypoints().map(function (wp) {
+                return wp.latLng;
+              })
+            )
+          );
+        }
+      })
+      .addTo(map);
+
+    routeControl.spliceWaypoints(0, 2);
+    routeControl.setWaypoints([]);
+
+    function addWayP(y, x) {
+      var waypoints = new L.Routing.Waypoint();
+      waypoints.latLng = {};
+      console.log(y);
+      console.log(x);
+
+      waypoints.latlng.lat = y;
+      waypoints.latlng.lng = x;
+    }
+
+  </script>
+</body>
+
+</html>

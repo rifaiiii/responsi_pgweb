@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <style type="text/css">
+      #toggle-building {
+        z-index: 1;
+        position: fixed;
+        top: 5px;
+        left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cesiumContainer"></div>
+    <button id="toggle-building">Toggle new building</button>
+    <script>
+      // Get your token from https://cesium.com/ion/tokens
+      Cesium.Ion.defaultAccessToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NmE3ODU4ZS05YzRlLTQxNjQtYTA2OC1lMTdhNDM3MTE0YTAiLCJpZCI6OTMzMTcsImlhdCI6MTY1MjI1MTI5NX0.zuIvD5NpbQDGjcnTQso_0Yw97_i6qmR-dQXkCc8MD0g";
+      // Keep your `Cesium.Ion.defaultAccessToken = 'your_token_here'` line from before here.
+      // STEP 4 CODE (replaces steps 2 and 3)
+      // Keep your `Cesium.Ion.defaultAccessToken = 'your_token_here'` line from before here.
+      // Keep your Cesium.Ion.defaultAccessToken = 'your_token_here' line above.
+      // STEP 2 CODE
+      // Initialize the viewer with Cesium World Terrain.
+      const viewer = new Cesium.Viewer("cesiumContainer", {
+        terrainProvider: Cesium.createWorldTerrain(),
+      });
+      // Add Cesium OSM Buildings.
+      const buildingsTileset = viewer.scene.primitives.add(
+        Cesium.createOsmBuildings()
+      );
+      // Fly the camera to Ka'bah, Mekkah at the given longitude, latitude, and height.
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(
+          39.82558337160098,
+          21.418146996555066,
+          1000
+        ),
+        orientation: {
+          heading: Cesium.Math.toRadians(20.0),
+          pitch: Cesium.Math.toRadians(-35.0),
+          roll: 0.0,
+        },
+      });
+
+      // STEP 3 CODE
+      async function addBuildingGeoJSON() {
+        // Load the GeoJSON file from Cesium ion.
+        const geoJSONURL = await Cesium.IonResource.fromAssetId(1012006);
+        // Create the geometry from the GeoJSON, and clamp it to the ground.
+        const geoJSON = await Cesium.GeoJsonDataSource.load(geoJSONURL, {
+          clampToGround: true,
+        });
+        // Add it to the scene.
+        const dataSource = await viewer.dataSources.add(geoJSON);
+        // By default, polygons in CesiumJS will be draped over all 3D content in the scene.
+        // Modify the polygons so that this draping only applies to the terrain, not 3D buildings.
+        for (const entity of dataSource.entities.values) {
+          entity.polygon.classificationType = Cesium.ClassificationType.TERRAIN;
+        }
+        // Move the camera so that the polygon is in view.
+        viewer.flyTo(dataSource);
+      }
+      addBuildingGeoJSON();
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+        color: {
+          conditions: [
+            ["${name} === 'Saptco Bus Station'", "color('red')"],
+            ["true", "color('white')"],
+          ],
+        },
+      });
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+        color: {
+          conditions: [
+            ["${material} === null", "color('white')"],
+            ["${material} === 'glass'", "color('skyblue', 0.5)"],
+            ["${material} === 'concrete'", "color('grey')"],
+            ["${material} === 'brick'", "color('indianred')"],
+            ["true", "color('white')"],
+          ],
+        },
+      });
+      // Lock camera to a point
+      var center = Cesium.Cartesian3.fromRadians(
+        2.4213211833389243,
+        0.6171926869414084,
+        3626.0426275055174
+      );
+      var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
+      viewer.scene.camera.lookAtTransform(
+        transform,
+        new Cesium.HeadingPitchRange(0, -Math.PI / 8, 2900)
+      );
+
+      // Orbit this point
+      viewer.clock.onTick.addEventListener(function (clock) {
+        viewer.scene.camera.rotateRight(0.005);
+      });
+    </script>
+  </body>
+</html>
