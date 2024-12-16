@@ -24,6 +24,5 @@
 >![Map](asset/Map.jpg)
 >![Data](asset/Table.jpg)
 
->**Link Project**
->https://amirulash.github.io/Pacitanku/
+
 # responsi_pgweb
